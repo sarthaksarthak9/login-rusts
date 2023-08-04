@@ -1,26 +1,5 @@
-use lambda_flows::{request_received, send_response};
-use flowsnet_platform_sdk::logger;
 use std::collections::HashMap;
-use serde_json::Value;
 use std::io;
-
-#[no_mangle]
-#[tokio::main(flavor = "current_thread")]
-pub async fn run() -> anyhow::Result<()> {
-    request_received(|headers, qry, body| {
-        handler(headers, qry, body)
-    }).await;
-    Ok(())
-}
-
-async fn handler(headers: HashMap<String, String>, qry: HashMap<String, String>, body: String) -> HashMap<String, String> {
-    // Process the request data and generate a response
-    let response = format!("Received request with headers: {:?}, query: {:?}, and body: {}", headers, qry, body);
-
-    let mut response_map = HashMap::new();
-    response_map.insert(String::from("response"), response);
-    response_map
-}
 
 
 fn main() {
